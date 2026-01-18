@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CleanCut Background Remover</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <div>
+          <p class="pill">AI background removal • High-quality masks</p>
+          <h1>Remove image backgrounds in seconds — with studio-grade quality.</h1>
+          <p class="lead">
+            Upload a photo, let the AI cut it cleanly, and download a transparent PNG. Processing
+            happens on-device for the best detail, and you can still use the optional API fallback
+            when you need even heavier processing.
+          </p>
+        </div>
+        <div class="hero-card">
+          <h2>Quick start</h2>
+          <ol>
+            <li>Drop an image or choose a file below.</li>
+            <li>Click “Remove background”.</li>
+            <li>Download your transparent PNG.</li>
+          </ol>
+          <div class="toggle-row">
+            <label class="switch">
+              <input id="fallbackToggle" type="checkbox" />
+              <span class="slider"></span>
+            </label>
+            <div>
+              <p class="toggle-title">Use cloud fallback (optional)</p>
+              <p class="toggle-caption">Adds extra accuracy for complex hair or fur.</p>
+            </div>
+          </div>
+          <div class="api-row" id="apiRow" hidden>
+            <label for="apiKey">Remove.bg API key</label>
+            <input id="apiKey" type="password" placeholder="Enter your API key" />
+            <p class="hint">Your key stays in your browser only.</p>
+          </div>
+        </div>
+      </header>
+
+      <section class="workspace">
+        <div class="dropzone" id="dropzone">
+          <input id="fileInput" type="file" accept="image/*" />
+          <div class="dropzone-inner">
+            <h3>Drop an image here</h3>
+            <p>or click to browse</p>
+            <span class="file-hint">PNG, JPG, or WEBP up to 12MB</span>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button id="removeButton" class="primary" disabled>Remove background</button>
+          <button id="resetButton" class="ghost" disabled>Reset</button>
+          <button id="downloadButton" class="secondary" disabled>Download PNG</button>
+        </div>
+
+        <div class="status" id="status">Waiting for an image…</div>
+
+        <div class="preview-grid">
+          <div class="preview">
+            <p>Original</p>
+            <div class="image-frame" id="originalFrame">
+              <img id="originalImage" alt="Original upload" />
+            </div>
+          </div>
+          <div class="preview">
+            <p>Background removed</p>
+            <div class="image-frame checker" id="resultFrame">
+              <img id="resultImage" alt="Background removed result" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="features">
+        <div>
+          <h3>Best-quality cutouts</h3>
+          <p>
+            The default mode runs locally in your browser using an advanced segmentation model. It
+            keeps edge detail for hair, fur, and glass while preserving the original resolution.
+          </p>
+        </div>
+        <div>
+          <h3>Cloud boost when needed</h3>
+          <p>
+            Toggle the optional Remove.bg API for extra accuracy with difficult subjects. Your key
+            stays in your browser and is never stored.
+          </p>
+        </div>
+        <div>
+          <h3>Download ready assets</h3>
+          <p>
+            Export a transparent PNG instantly and continue editing in your favorite design tool.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Built for high-fidelity background removal — locally and securely.</p>
+    </footer>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
