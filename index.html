@@ -22,6 +22,12 @@
             Upload image, process through API endpoint, and download transparent PNG. This app now
             includes backend API (`/api/remove-background`) so your client doesn't need to call
             external service directly.
+          <p class="pill">AI background removal • High-quality masks</p>
+          <h1>Remove image backgrounds in seconds — with studio-grade quality.</h1>
+          <p class="lead">
+            Upload a photo, let the AI cut it cleanly, and download a transparent PNG. Processing
+            happens on-device for the best detail, and you can still use the optional API fallback
+            when you need even heavier processing.
           </p>
         </div>
         <div class="hero-card">
@@ -30,6 +36,9 @@
             <li>Drop image or click browse.</li>
             <li>Click “Remove background”.</li>
             <li>Download transparent PNG.</li>
+            <li>Drop an image or choose a file below.</li>
+            <li>Click “Remove background”.</li>
+            <li>Download your transparent PNG.</li>
           </ol>
           <div class="toggle-row">
             <label class="switch">
@@ -39,12 +48,15 @@
             <div>
               <p class="toggle-title">Use custom API key</p>
               <p class="toggle-caption">Override server key for this request only.</p>
+              <p class="toggle-title">Use cloud fallback (optional)</p>
+              <p class="toggle-caption">Adds extra accuracy for complex hair or fur.</p>
             </div>
           </div>
           <div class="api-row" id="apiRow" hidden>
             <label for="apiKey">Remove.bg API key</label>
             <input id="apiKey" type="password" placeholder="Enter your API key" />
             <p class="hint">Optional if server already has REMOVE_BG_API_KEY.</p>
+            <p class="hint">Your key stays in your browser only.</p>
           </div>
         </div>
       </header>
@@ -56,6 +68,7 @@
             <h3>Drop an image here</h3>
             <p>or click to browse</p>
             <span class="file-hint">PNG, JPG, WEBP up to 12MB</span>
+            <span class="file-hint">PNG, JPG, or WEBP up to 12MB</span>
           </div>
         </div>
 
