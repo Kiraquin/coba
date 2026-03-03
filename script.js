@@ -13,6 +13,8 @@ const apiKeyInput = document.getElementById("apiKey");
 let currentFile = null;
 let resultBlob = null;
 
+const setStatus = (message) => {
+  statusText.textContent = message;
 const setStatus = (message, tone = "info") => {
   statusText.textContent = message;
   statusText.dataset.tone = tone;
@@ -36,6 +38,15 @@ const resetState = () => {
 
 const handleFile = (file) => {
   if (!file || !file.type.startsWith("image/")) {
+    setStatus("Please upload a valid image file.");
+    return;
+  }
+
+  if (file.size > 12 * 1024 * 1024) {
+    setStatus("Image too large. Max file size is 12MB.");
+    return;
+  }
+
     setStatus("Please upload a valid image file.", "error");
     return;
   }
@@ -47,6 +58,16 @@ const handleFile = (file) => {
   updateButtons();
 };
 
+const removeBackgroundViaApi = async (file, apiKey) => {
+  const formData = new FormData();
+  formData.append("image", file);
+
+  if (apiKey) {
+    formData.append("api_key", apiKey);
+  }
+
+  const response = await fetch("/api/remove-background", {
+    method: "POST",
 const removeBackgroundLocal = async (file) => {
   setStatus("Loading AI model… This may take a moment.");
   const moduleUrl =
@@ -92,6 +113,13 @@ const removeBackgroundCloud = async (file, apiKey) => {
   });
 
   if (!response.ok) {
+    const contentType = response.headers.get("content-type") || "";
+    if (contentType.includes("application/json")) {
+      const payload = await response.json();
+      throw new Error(payload.error || payload.details || "API request failed.");
+    }
+    const text = await response.text();
+    throw new Error(text || "API request failed.");
     const errorText = await response.text();
     throw new Error(
       `Cloud removal failed: ${response.status}. ${errorText || ""}`.trim()
@@ -103,6 +131,19 @@ const removeBackgroundCloud = async (file, apiKey) => {
 
 const processRemoval = async () => {
   if (!currentFile) return;
+
+  removeButton.disabled = true;
+  setStatus("Removing background with API…");
+
+  try {
+    const userApiKey = fallbackToggle.checked ? apiKeyInput.value.trim() : "";
+    const outputBlob = await removeBackgroundViaApi(currentFile, userApiKey);
+
+    resultBlob = outputBlob;
+    resultImage.src = URL.createObjectURL(outputBlob);
+    setStatus("Done! Background removed with best quality output.");
+  } catch (error) {
+    setStatus(error.message || "Something went wrong. Please try again.");
   removeButton.disabled = true;
   setStatus("Starting background removal…");
 
@@ -124,6 +165,7 @@ const processRemoval = async () => {
 
 const downloadResult = () => {
   if (!resultBlob) return;
+
   const link = document.createElement("a");
   link.href = URL.createObjectURL(resultBlob);
   link.download = "background-removed.png";

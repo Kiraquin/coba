@@ -16,6 +16,12 @@
     <main class="page">
       <header class="hero">
         <div>
+          <p class="pill">API-powered • High-quality cutout</p>
+          <h1>Remove image background with premium quality API.</h1>
+          <p class="lead">
+            Upload image, process through API endpoint, and download transparent PNG. This app now
+            includes backend API (`/api/remove-background`) so your client doesn't need to call
+            external service directly.
           <p class="pill">AI background removal • High-quality masks</p>
           <h1>Remove image backgrounds in seconds — with studio-grade quality.</h1>
           <p class="lead">
@@ -27,6 +33,9 @@
         <div class="hero-card">
           <h2>Quick start</h2>
           <ol>
+            <li>Drop image or click browse.</li>
+            <li>Click “Remove background”.</li>
+            <li>Download transparent PNG.</li>
             <li>Drop an image or choose a file below.</li>
             <li>Click “Remove background”.</li>
             <li>Download your transparent PNG.</li>
@@ -37,6 +46,8 @@
               <span class="slider"></span>
             </label>
             <div>
+              <p class="toggle-title">Use custom API key</p>
+              <p class="toggle-caption">Override server key for this request only.</p>
               <p class="toggle-title">Use cloud fallback (optional)</p>
               <p class="toggle-caption">Adds extra accuracy for complex hair or fur.</p>
             </div>
@@ -44,6 +55,7 @@
           <div class="api-row" id="apiRow" hidden>
             <label for="apiKey">Remove.bg API key</label>
             <input id="apiKey" type="password" placeholder="Enter your API key" />
+            <p class="hint">Optional if server already has REMOVE_BG_API_KEY.</p>
             <p class="hint">Your key stays in your browser only.</p>
           </div>
         </div>
@@ -55,6 +67,7 @@
           <div class="dropzone-inner">
             <h3>Drop an image here</h3>
             <p>or click to browse</p>
+            <span class="file-hint">PNG, JPG, WEBP up to 12MB</span>
             <span class="file-hint">PNG, JPG, or WEBP up to 12MB</span>
           </div>
         </div>
@@ -82,33 +95,10 @@
           </div>
         </div>
       </section>
-
-      <section class="features">
-        <div>
-          <h3>Best-quality cutouts</h3>
-          <p>
-            The default mode runs locally in your browser using an advanced segmentation model. It
-            keeps edge detail for hair, fur, and glass while preserving the original resolution.
-          </p>
-        </div>
-        <div>
-          <h3>Cloud boost when needed</h3>
-          <p>
-            Toggle the optional Remove.bg API for extra accuracy with difficult subjects. Your key
-            stays in your browser and is never stored.
-          </p>
-        </div>
-        <div>
-          <h3>Download ready assets</h3>
-          <p>
-            Export a transparent PNG instantly and continue editing in your favorite design tool.
-          </p>
-        </div>
-      </section>
     </main>
 
     <footer class="footer">
-      <p>Built for high-fidelity background removal — locally and securely.</p>
+      <p>Frontend + API backend for high-fidelity background removal.</p>
     </footer>
 
     <script type="module" src="script.js"></script>
