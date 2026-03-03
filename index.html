@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CleanCut Background Remover</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <div>
+          <p class="pill">API-powered • High-quality cutout</p>
+          <h1>Remove image background with premium quality API.</h1>
+          <p class="lead">
+            Upload image, process through API endpoint, and download transparent PNG. This app now
+            includes backend API (`/api/remove-background`) so your client doesn't need to call
+            external service directly.
+          </p>
+        </div>
+        <div class="hero-card">
+          <h2>Quick start</h2>
+          <ol>
+            <li>Drop image or click browse.</li>
+            <li>Click “Remove background”.</li>
+            <li>Download transparent PNG.</li>
+          </ol>
+          <div class="toggle-row">
+            <label class="switch">
+              <input id="fallbackToggle" type="checkbox" />
+              <span class="slider"></span>
+            </label>
+            <div>
+              <p class="toggle-title">Use custom API key</p>
+              <p class="toggle-caption">Override server key for this request only.</p>
+            </div>
+          </div>
+          <div class="api-row" id="apiRow" hidden>
+            <label for="apiKey">Remove.bg API key</label>
+            <input id="apiKey" type="password" placeholder="Enter your API key" />
+            <p class="hint">Optional if server already has REMOVE_BG_API_KEY.</p>
+          </div>
+        </div>
+      </header>
+
+      <section class="workspace">
+        <div class="dropzone" id="dropzone">
+          <input id="fileInput" type="file" accept="image/*" />
+          <div class="dropzone-inner">
+            <h3>Drop an image here</h3>
+            <p>or click to browse</p>
+            <span class="file-hint">PNG, JPG, WEBP up to 12MB</span>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button id="removeButton" class="primary" disabled>Remove background</button>
+          <button id="resetButton" class="ghost" disabled>Reset</button>
+          <button id="downloadButton" class="secondary" disabled>Download PNG</button>
+        </div>
+
+        <div class="status" id="status">Waiting for an image…</div>
+
+        <div class="preview-grid">
+          <div class="preview">
+            <p>Original</p>
+            <div class="image-frame" id="originalFrame">
+              <img id="originalImage" alt="Original upload" />
+            </div>
+          </div>
+          <div class="preview">
+            <p>Background removed</p>
+            <div class="image-frame checker" id="resultFrame">
+              <img id="resultImage" alt="Background removed result" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Frontend + API backend for high-fidelity background removal.</p>
+    </footer>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
